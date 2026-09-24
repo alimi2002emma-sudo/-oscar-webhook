@@ -55,7 +55,7 @@ app.get('/webhook', (req, res) => {
 async function sendMessage(to, body) {
   try {
     const response = await axios.post(
-      https://graph.facebook.com/v20.0/${PHONE_NUMBER_ID}/messages,
+  `https://graph.facebook.com/v20.0/${PHONE_NUMBER_ID}/messages`,
       {
         messaging_product: "whatsapp",
         to: to,
@@ -467,9 +467,7 @@ We'll use it for your payment receipt.`
       if (!emailRegex.test(text)) {
         await sendMessage(
           from,
-          "That doesn't look like a valid email address.
-
-Please enter your email again."
+"That doesn't look like a valid email address" 
         );
 
         return res.sendStatus(200);
