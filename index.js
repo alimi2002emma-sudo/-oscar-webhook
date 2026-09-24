@@ -40,6 +40,43 @@ app.post('/webhook', async (req, res) => {
   }
 });
 
+
+app.get('/privacy-policy', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Oscar Shawarma Privacy Policy</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body style="font-family: Arial; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6;">
+      <h1>Oscar Shawarma Privacy Policy</h1>
+
+      <p>Oscar Shawarma respects your privacy. This Privacy Policy explains how information is handled when you communicate with us through WhatsApp.</p>
+
+      <h2>Information We Collect</h2>
+      <p>When you contact Oscar Shawarma through WhatsApp, we may receive your WhatsApp phone number and the messages or order information you send to us.</p>
+
+      <h2>How We Use Information</h2>
+      <p>We use this information to respond to customers, process orders, provide customer support, and communicate about orders.</p>
+
+      <h2>Information Sharing</h2>
+      <p>We do not sell your personal information. Information may be processed by service providers used to operate our WhatsApp ordering system and process payments.</p>
+
+      <h2>Data Retention</h2>
+      <p>We retain information only for as long as reasonably necessary to provide our services, process orders, maintain records, and meet applicable legal obligations.</p>
+
+      <h2>Your Privacy Choices</h2>
+      <p>You may contact Oscar Shawarma to ask questions about your information or request deletion where applicable.</p>
+
+      <h2>Contact</h2>
+      <p>For privacy questions, please contact Oscar Shawarma through our official business contact channels.</p>
+
+      <p><strong>Last updated: September 2026</strong></p>
+    </body>
+    </html>
+  `);
+});
 app.get('/', (req, res) => res.send('Oscar bot live!'));
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`Server on ${PORT}`));
