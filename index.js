@@ -18,6 +18,7 @@ const MENU = [
 
 let carts = {};
 let userState = {};
+let pendingItem = {};
 
 // 1. META WEBHOOK VERIFICATION
 app.get("/webhook", (req, res) => {
