@@ -101,15 +101,15 @@ function formatCart(cart) {
   cart.forEach((item, index) => {
     const subtotal = item.price * item.quantity;
 
- message += ${index + 1}. ${item.name}\n;   
-    message += Quantity: ${item.quantity}\n;
-    message += Subtotal: ₦${subtotal.toLocaleString()}\n\n;
+ message += (index + 1) + ". " + item.name + "\n";
+message += "Quantity: " + item.quantity + "\n";
+message += "Subtotal: ₦" + subtotal.toLocaleString() + "\n";
   });
 
   const total = getCartTotal(cart);
 
-  message += ━━━━━━━━━━━━━━\n;
-  message += TOTAL: ₦${total.toLocaleString()};
+message += "────────────\n";
+message += "TOTAL: ₦" + total.toLocaleString();
 
   return message;
 }
