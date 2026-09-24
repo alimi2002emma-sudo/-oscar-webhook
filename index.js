@@ -49,7 +49,7 @@ app.post("/webhook", async (req, res) => {
       text === "menu" ||
       text === "list"
     ) {
-      let reply = "Welcome to ALAOMA OSCAR SHAWARMA 🌯🔥\n\n";
+      let reply = "Welcome to OSCAR SHAWARMA 🌯🔥\n\n";
 
       reply += "We are delighted to serve you.\n\n";
 
