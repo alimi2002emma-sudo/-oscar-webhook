@@ -101,7 +101,7 @@ function formatCart(cart) {
   cart.forEach((item, index) => {
     const subtotal = item.price * item.quantity;
 
-    message += ${index + 1}. ${item.name}\n;
+ message += ${index + 1}. ${item.name}\n;   
     message += Quantity: ${item.quantity}\n;
     message += Subtotal: ₦${subtotal.toLocaleString()}\n\n;
   });
