@@ -82,23 +82,56 @@ app.post("/webhook", async (req, res) => {
       return res.sendStatus(200);
     }
 
-    // ADD TO CART
-    if (["1", "2", "3", "4"].includes(text)) {
-      const item = MENU[parseInt(text) - 1];
+   // RECEIVE QUANTITY
+if (userState[from] === "awaiting_quantity") {
+  const quantity = parseInt(text);
 
-      carts[from].push(item);
+  if (isNaN(quantity) || quantity < 1 || quantity > 50) {
+    await sendMessage(
+      from,
+      "Please enter a valid quantity between 1 and 50."
+    );
+    return res.sendStatus(200);
+  }
 
-      let msg = "✅ Item added to your cart.\n\n";
-      msg += item.name + "\n";
-      msg += "Price: ₦" + item.price.toLocaleString() + "\n\n";
+  const item = pendingItem[from];
 
-      msg += "Type MENU to add another item.\n";
-      msg += "Type CART to review your order.\n";
-      msg += "Type CHECKOUT to proceed.";
+  for (let i = 0; i < quantity; i++) {
+    carts[from].push(item);
+  }
 
-      await sendMessage(from, msg);
-      return res.sendStatus(200);
-    }
+  const subtotal = item.price * quantity;
+
+  pendingItem[from] = null;
+  userState[from] = null;
+
+  let msg = "✅ ITEM ADDED TO CART\n\n";
+  msg += quantity + " × " + item.name + "\n";
+  msg += "Subtotal: ₦" + subtotal.toLocaleString() + "\n\n";
+  msg += "Type MENU to add another item.\n";
+  msg += "Type CART to review your order.";
+
+  await sendMessage(from, msg);
+  return res.sendStatus(200);
+}
+
+// ADD TO CART
+if (["1", "2", "3", "4"].includes(text)) {
+  const item = MENU[parseInt(text) - 1];
+
+  pendingItem[from] = item;
+  userState[from] = "awaiting_quantity";
+
+  await sendMessage(
+    from,
+    "How many would you like?\n\n" +
+    "Item: " + item.name + "\n" +
+    "Price per item: ₦" + item.price.toLocaleString() + "\n\n" +
+    "Please enter the quantity. Example: 3"
+  );
+
+  return res.sendStatus(200);
+}
 
     // VIEW CART
     if (text === "cart") {
