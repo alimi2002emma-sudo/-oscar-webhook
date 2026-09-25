@@ -311,7 +311,7 @@ if (["1", "2", "3", "4"].includes(text)) {
         "Our team will contact you on 07025635078 to confirm your delivery fee and delivery details.\n\n";
 
       orderSummary +=
-        "Thank you for choosing Alaoma Oscar Shawarma. 🌯❤️";
+        "Thank you for choosing Oscar Shawarma. 🌯❤️";
 
       await sendMessage(from, orderSummary);
 
