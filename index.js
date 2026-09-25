@@ -75,7 +75,7 @@ if (
 ) {
   welcomed[from] = true;
 
-  let reply = "Welcome to *ALAOMA OSCAR SHAWARMA* 🌯\n\n";
+  let reply = "Welcome to *OSCAR SHAWARMA* 🌯\n\n";
   reply += "We are delighted to serve you.\n\n";
   reply += "*OUR MENU*\n";
   reply += "────────────\n";
