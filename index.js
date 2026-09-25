@@ -19,6 +19,7 @@ const MENU = [
 let carts = {};
 let userState = {};
 let pendingItem = {};
+let welcomed = {};
 
 // 1. META WEBHOOK VERIFICATION
 app.get("/webhook", (req, res) => {
@@ -43,13 +44,55 @@ app.post("/webhook", async (req, res) => {
 
     if (!carts[from]) carts[from] = [];
 
-    // MENU
-    if (
-      text === "hi" ||
-      text === "hello" ||
-      text === "menu" ||
-      text === "list"
-    ) {
+    // GREETINGS & MENU
+const greetings = [
+  "hi",
+  "hello",
+  "hey",
+  "hii",
+  "hiii",
+  "heyy",
+  "wassup",
+  "what's up",
+  "whats up",
+  "yo",
+  "good morning",
+  "good afternoon",
+  "good evening",
+  "how are you",
+  "how are you doing",
+  "how far",
+  "hi oscar"
+];
+
+let welcomed = {};
+
+if (
+ !welcomed[from] ||
+  greetings.some(g => text.includes(g)) ||
+  text === "menu" ||
+  text === "list"
+) {
+  welcomed[from] = true;
+
+  let reply = "Welcome to *ALAOMA OSCAR SHAWARMA* 🌯\n\n";
+  reply += "We are delighted to serve you.\n\n";
+  reply += "*OUR MENU*\n";
+  reply += "────────────\n";
+  for (let i = 0; i < MENU.length; i++) {
+    reply += (i + 1) + ". " + MENU[i].name + " - ₦" + MENU[i].price.toLocaleString() + "\n";
+  }
+  reply += "────────────\n\n";
+  reply += "Reply with a menu number to add an item to your cart.\n";
+  reply += "Type *CART* to view your cart.\n";
+  reply += "Type *ABOUT* for business information.\n";
+  reply += "Type *CHECKOUT* to place your order.\n\n";
+  reply += "📍 Delivery: Enugu Town - Fee depends on your location.\n";
+  reply += "📞 07025635078";
+
+  await sendMessage(from, reply);
+  return res.sendStatus(200);
+} {
       let reply = "Welcome to OSCAR SHAWARMA 🌯🔥\n\n";
 
       reply += "We are delighted to serve you.\n\n";
